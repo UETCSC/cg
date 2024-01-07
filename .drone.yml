@@ -8,7 +8,7 @@ steps:
     image: appleboy/drone-git-push
     settings:
       branch: main
-      remote: "ssh://git@github.com/ctfhub-team/challenge_generate.git"
+      remote: "ssh://git@github.com/UET-CTF/cg.git
       force: false
       followtags: true
       ssh_key:
@@ -27,7 +27,7 @@ steps:
       GOARCH: amd64
       GO111MODULE: "on"
     commands:
-      - sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
+      - sed -i 's/deb.debian.org/mirror.xtom.com.hk/g' /etc/apt/sources.list
       - apt update && apt install -y zip
       - make all
 

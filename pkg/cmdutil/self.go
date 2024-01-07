@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	ORG  = "ctfhub-team"
-	REPO = "challenge_generate"
+	ORG  = "UETCSC"
+	REPO = "cg"
 )
 
 func Upgrade(proxy string) {
@@ -24,15 +24,14 @@ func Upgrade(proxy string) {
 		os.Exit(1)
 	}
 	if !yes {
-		fmt.Println("当前cg为最新版 " + util.Version)
+		fmt.Println("cg version is the latest, " + util.Version)
 	} else {
-		fmt.Printf("发现新版本 cg %s ", latest.TagName)
-		// 应用更新
+		fmt.Printf("cg has a new version %s ", latest.TagName)
 		if err = up.Apply(latest, findAsset, proxy); err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
-		fmt.Println("升级完成")
+		fmt.Println("cg updated successfully.")
 	}
 }
 
@@ -42,12 +41,12 @@ func SelfCheck(proxy string) {
 	if err != nil {
 		os.Exit(1)
 	}
-	fmt.Println("云端cg版本 " + latest.TagName)
-	fmt.Println("本地cg版本 " + util.Version)
+	fmt.Println("cg latest version: " + latest.TagName)
+	fmt.Println("cg current version: " + util.Version)
 }
 func findAsset(items []github.Asset) (idx int) {
 	suffix := fmt.Sprintf("cg_%s_%s", runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("开始下载 %s\n", suffix)
+	fmt.Printf("Start downloading %s\n", suffix)
 	for i := range items {
 		if strings.HasSuffix(items[i].BrowserDownloadURL, suffix) {
 			return i

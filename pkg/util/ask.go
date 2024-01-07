@@ -11,7 +11,7 @@ import (
 )
 
 var errorMessages = map[string]string{
-	"interrupt": "程序已退出 (Program exited.)",
+	"interrupt": "Program exited.",
 }
 
 func HandleErr(e error) {

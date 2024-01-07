@@ -12,19 +12,19 @@ type error interface {
 }
 
 var errorMessages = map[string]string{
-	"InvalidAccessKeyId.NotFound": "当前访问密钥无效 (Current access key are invalid)",
-	"Message: The specified parameter \"SecurityToken.Expired\" is not valid.": "当前临时访问密钥已过期 (Current SecurityToken has expired)",
-	"ErrorCode: InvalidSecurityToken.Expired":                                  "当前临时访问密钥已过期 (Current SecurityToken has expired)",
-	"Message: The Access Key is disabled.":                                     "当前访问密钥已被禁用 (The Access Key is disabled)",
-	"ErrorCode: Forbidden.RAM":                                                 "当前访问密钥没有执行命令的权限 (Current Access Key do not have permission to execute commands)",
-	"ErrorCode: NoPermission":                                                  "当前访问密钥没有接管控制台的权限 (Current Access Key do not have permission to take over the console)",
-	"ErrorCode=NoSuchKey":                                                      "存储桶中没有这个对象 (There is no such key in the bucket)",
+	"InvalidAccessKeyId.NotFound": "Current access key are invalid",
+	"Message: The specified parameter \"SecurityToken.Expired\" is not valid.": "Current SecurityToken has expired",
+	"ErrorCode: InvalidSecurityToken.Expired":                                  "Current SecurityToken has expired",
+	"Message: The Access Key is disabled.":                                     "The Access Key is disabled",
+	"ErrorCode: Forbidden.RAM":                                                 "Current Access Key do not have permission to execute commands",
+	"ErrorCode: NoPermission":                                                  "Current Access Key do not have permission to take over the console)",
+	"ErrorCode=NoSuchKey":                                                      "There is no such key in the bucket)",
 	"Code=ResourceNotFound, Message=未查询到对应机器":                                  "指定资源不存在 (Resource not found)",
-	//"Code=UnauthorizedOperation":                                               "当前 AK 权限不足 (Insufficient Access Key permissions)",
-	"you are not authorized to perform operation (tat:CreateCommand)": "当前 AK 不具备执行命令的权限 (This Access Key does not have permission to execute commands)",
-	"network is unreachable":       "当前网络连接异常 (Network is unreachable)",
-	"InvalidSecurityToken.Expired": "临时令牌已过期 (STS token has expired)",
-	"InvalidAccessKeyId.Inactive":  "当前 AK 已被禁用 (The current AccessKeyId is inactive)",
+	//Code=UnauthorizedOperation: "Insufficient Access Key permissions are currently available",
+	"you are not authorized to perform operation (tat:CreateCommand)": "This Access Key does not have permission to execute commands",
+	"network is unreachable":       "Network is unreachable",
+	"InvalidSecurityToken.Expired": "STS token has expired",
+	"InvalidAccessKeyId.Inactive":  "The current AccessKeyId is inactive",
 	"interrupt":                    "程序已退出 (Program exited.)",
 	"ErrorCode=AccessDenied, ErrorMessage=\"The bucket you access does not belong to you.\"": "获取 Bucket 信息失败，访问被拒绝 (Failed to get Bucket information, access is denied.)",
 	"ExpiredToken":                                                        "当前访问密钥已过期 (Current token has expired)",
@@ -42,35 +42,41 @@ var errorMessages = map[string]string{
 }
 
 var errorMessagesNoExit = map[string]string{
-	"ErrorCode: Forbidden.RAM": "当前访问密钥没有执行命令的权限 (Current Access Key do not have permission to execute commands)",
-	//"ErrorCode: Forbidden":                                               " 当前访问密钥没有 RDS 的读取权限 (Current Access Key do not have read access to RDS"),
-	"You are forbidden to list buckets.":                                 "当前凭证不具备 OSS 的读取权限，无法获取 OSS 数据。 (OSS data is not available because the current credential does not have read access to OSS.)",
-	"ErrorCode: EntityAlreadyExists.User.Policy":                         "已接管过控制台，无需重复接管 (Console has been taken over)",
-	"ErrorCode: EntityAlreadyExists.User":                                "已接管过控制台，无需重复接管 (Console has been taken over)",
-	"ErrorCode: EntityNotExist.User":                                     "已取消接管控制台，无需重复取消 (Console has been de-taken over)",
-	"Code=ResourceNotFound, Message=指定资源":                                "指定资源不存在 (ResourceNotFound)",
-	"InvalidParameter.SubUserNameInUse":                                  "已接管过控制台，无需重复接管 (Console has been taken over)",
+	"ErrorCode: Forbidden.RAM": "Current Access Key do not have permission to execute commands",
+	//"ErrorCode: Forbidden": "Current Access Key do not have read access to RDS",
+	"You are forbidden to list buckets.":                                 "OSS data is not available because the current credential does not have read access to OSS.",
+	"ErrorCode: EntityAlreadyExists.User.Policy":                         "Console has been taken over",
+	"ErrorCode: EntityAlreadyExists.User":                                "Console has been taken over",
+	"ErrorCode: EntityNotExist.User":                                     "Console has been de-taken over",
+	"Code=ResourceNotFound, Message=指定资源":                                "ResourceNotFound",
+	"InvalidParameter.SubUserNameInUse":                                  "Console has been taken over",
 	"you are not authorized to perform operation (cwp:DescribeMachines)": "当前 AK 没有 CWP 权限",
 }
 
 var errorMessagesExit = map[string]string{
-	"ErrorCode: Forbidden.RAM":     "当前访问密钥没有执行命令的权限 (Current Access Key do not have permission to execute commands)",
-	"ErrorCode: NoPermission":      "当前访问密钥没有接管控制台的权限 (Current Access Key do not have permission to take over the console)",
-	"network is unreachable":       "当前网络连接异常 (Network is unreachable)",
-	"InvalidSecurityToken.Expired": "临时令牌已过期 (STS token has expired)",
-	"InvalidAccessKeyId.Inactive":  "当前 AK 已被禁用 (The current AccessKeyId is inactive)",
-	//"Message=操作未授权，请检查CAM策略。":  "当前 AK 权限不足 (Insufficient Access Key permissions)",
-	"Code=AuthFailure.SecretIdNotFound": "SecretId 不存在，请输入正确的密钥 (SecretId does not exist, please enter the correct key.)",
-	"Code=AuthFailure.SignatureFailure": "请求签名验证失败，请检查您的访问密钥是否正确 (Request signature verification failed, please check if your access key is correct.)",
-	"read: connection reset by peer":    "网络连接出现错误，请检查您的网络环境是否正常 (There is an error in your network connection, please check if your network environment is normal.)",
-	"InvalidAccessKeyId.NotFound":       "当前访问密钥无效 (Current access key are invalid)",
-	"InvalidAccessKeySecret":            "无效的 AccessKey (Invalid AccessKey)",
+	"ErrorCode: Forbidden.RAM":     "Current Access Key do not have permission to execute commands",
+	"ErrorCode: NoPermission":      "Current Access Key do not have permission to take over the console",
+	"network is unreachable":       "Network is unreachable",
+	"InvalidSecurityToken.Expired": "STS token has expired",
+	"InvalidAccessKeyId.Inactive":  "The current AccessKeyId is inactive",
+	//"Message = unauthorized operation, please check the CAM policy. "
+	"Code=AuthFailure.SecretIdNotFound": "SecretId does not exist, please enter the correct key.",
+	"Code=AuthFailure.SignatureFailure": "Request signature verification failed, please check if your access key is correct.)",
+	"read: connection reset by peer":    "There is an error in your network connection, please check if your network environment is normal.)",
+	"InvalidAccessKeyId.NotFound":       "Current access key are invalid)",
+	"InvalidAccessKeySecret":            "Invalid AccessKey",
 }
 
+// HandleErr logs the error and exits. If there are errors in the error string it will check if it contains any of the error keys that are to be logged and if so they will be logged as a warning to the user
+// 
+// @param e - error to log and
 func HandleErr(e error) {
+	// This function logs the error messages and exits with an exit code.
 	if e != nil {
 		log.Traceln(e.Error())
+		// Prints a message with a warning message if any of the error messages contain a key.
 		for k, v := range errorMessages {
+			// If the error is a string of the form e. Error k then exit with an error message.
 			if strings.Contains(e.Error(), k) {
 				log.Errorln(v)
 				os.Exit(0)
@@ -80,15 +86,23 @@ func HandleErr(e error) {
 	}
 }
 
+// HandleErrNoExit handles errors that do not exit. This is used to avoid logging in debug mode
+// 
+// @param e - error to handle or
 func HandleErrNoExit(e error) {
+	// log all errors and exit
 	if e != nil {
 		log.Traceln(e.Error())
+		// log. Debugln if any of the error messages are not in errorMessagesNoExit
 		for k, v := range errorMessagesNoExit {
+			// Log a debug message if the error is a string
 			if strings.Contains(e.Error(), k) {
 				log.Debugln(v)
 			}
 		}
+		// This function will log the error messages and exit with an exit code 0.
 		for k, v := range errorMessagesExit {
+			// If the error is a string of the form e. Error k then exit with an error message.
 			if strings.Contains(e.Error(), k) {
 				log.Errorln(v)
 				os.Exit(0)

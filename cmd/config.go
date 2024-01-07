@@ -16,8 +16,8 @@ func init() {
 
 var ConfigCmd = &cobra.Command{
 	Use:   "config",
-	Short: "设置 cg 的配置文件",
-	Long:  "设置 cg 的配置文件",
+	Short: "Configure cg settings file.",
+	Long:  "Configure cg settings file.",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 		os.Exit(0)
@@ -26,8 +26,8 @@ var ConfigCmd = &cobra.Command{
 
 var ConfigSetCmd = &cobra.Command{
 	Use:   "set",
-	Short: "进入配置设置向导",
-	Long:  "进入配置设置向导",
+	Short: "Set current config",
+	Long:  "Set current config",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmdutil.ConfigSet()
 	},
@@ -35,8 +35,8 @@ var ConfigSetCmd = &cobra.Command{
 
 var ConfigGetCmd = &cobra.Command{
 	Use:   "get",
-	Short: "获取当前配置",
-	Long:  "获取当前配置",
+	Short: "Get current config",
+	Long: "Get current config",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmdutil.ConfigGet()
 	},
@@ -44,8 +44,8 @@ var ConfigGetCmd = &cobra.Command{
 
 var ConfigCleanCmd = &cobra.Command{
 	Use:   "clean",
-	Short: "清除当前配置",
-	Long:  "清除当前配置",
+	Short: "Clean current config",
+	Long:  "Clean current config",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmdutil.ConfigClean()
 	},

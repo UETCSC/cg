@@ -157,7 +157,7 @@ func GenerateReadme(challengeInfo map[string]string) {
 	readme = strings.Replace(readme, "TASK_TYPE", meta.Task.Type, -1)
 	readme = strings.Replace(readme, "TASK_LEVEL", meta.Task.Level, -1)
 	if meta.Task.Flag == "" {
-		readme = strings.Replace(readme, "TASK_FLAG", "动态 flag", -1)
+		readme = strings.Replace(readme, "TASK_FLAG", "Dynamic flag", -1)
 	} else {
 		readme = strings.Replace(readme, "TASK_FLAG", meta.Task.Flag, -1)
 	}

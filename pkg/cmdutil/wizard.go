@@ -11,35 +11,35 @@ import (
 )
 
 /**
- * @Description: 生成题目模板
- * @param baseImageName 题目基础镜像名称
- * @param challengeType 题目类型
- * @param challengeName 题目名称
- * @param language 题目语言
- * @param hasDB 是否需要数据库
+ * @Description: Generated topic template
+ * @param baseImageName Title Basic mirror name
+ * @param challengeType Subject types
+ * @param challengeName Title Title
+ * @param language Subtitles
+ * @param hasDB Do you need a database?
  */
 func Generate(challengeInfo map[string]string) {
-	// flag位置确认
-	challengeInfo["need_flag"] = util.SelectArray("是否需要单独处理flag位置(flag.sh)", []string{"否", "是"})
-	challengeInfo["need_start"] = util.SelectArray("是否需要单独处理部分服务启动(start.sh)", []string{"否", "是"})
-	// 题目等级选择
-	challengeInfo["level"] = util.SelectArray("此题目难度为", global.Level)
+	// Flag location confirmed
+	challengeInfo["need_flag"] = util.SelectArray("Do you need to handle the flag logic separately? (flag.sh)", []string{"no", "yes"})
+	challengeInfo["need_start"] = util.SelectArray("Do you need to handle part of the service startup separately? (start.sh)", []string{"no", "yes"})
+	// Selection of subjects
+	challengeInfo["level"] = util.SelectArray("Challenge difficulty", global.Level)
 
-	// // DEBUG 测试输出
-	// s, _ := json.MarshalIndent(challengeInfo, "", "    ")
-	// fmt.Printf(string(s))
+	// //DEBUG test output
+	// The first is the "Calling Info", which is a reference to the "Calling Info" series.
+	// I'm not sure what I'm saying.
 
-	// 二次确认
-	confirm := util.SelectArray("确认创建题目 "+challengeInfo["challenge_name"]+" ?", []string{"确认", "取消"})
-	if confirm == "取消" {
+	// Second confirmation
+	confirm := util.SelectArray("Challenge creation confirmation "+challengeInfo["challenge_name"]+" ?", []string{"confirm", "cancel"})
+	if confirm == "cancel" {
 		os.Exit(0)
 	}
 
-	// 创建题目模板目录
+	// Create a template directory of topics
 	os.Mkdir(challengeInfo["challenge_name"], 0755)
 	os.Chdir(challengeInfo["challenge_name"])
 
-	// 创建文件夹
+	// Creating folders
 	dirTree := []string{
 		"environment/src/",
 		"environment/files/",
@@ -48,70 +48,70 @@ func Generate(challengeInfo map[string]string) {
 	for _, path := range dirTree {
 		os.MkdirAll(path, os.ModePerm)
 	}
-	// 写入dockerfile
+	// Write to the docker file
 	GenerateDockerFile(challengeInfo)
 
-	// 写入docker-compose.yml
+	// The following is the list of the official languages of the United States.
 	GenerateDockerCompose(challengeInfo)
 
-	// 写入meta.yml
+	// Write in meta.yml
 	GenerateMeta(challengeInfo)
 
-	// 写入数据库
+	// Write to the database
 	GenerateDB(challengeInfo)
 
-	// 写入flag.sh处理
+	// Write to flag.sh process
 	GenerateFlag(challengeInfo)
 
-	// 写入start.sh处理
+	// Write to start.sh process
 	GenerateStart(challengeInfo)
 
-	// 写入README.md
+	// Readme.md is a free app.
 	GenerateReadme(challengeInfo)
 
-	// 输出成功提示
+	// Successful input
 	fmt.Println("")
-	fmt.Println(challengeInfo["challenge_name"] + " 创建成功，请按如下步骤依次操作：")
-	fmt.Println("1. 初始化Git仓库")
-	fmt.Println("2. 编辑 " + challengeInfo["challenge_name"] + "/meta.yml 文件修改题目信息")
-	fmt.Println("3. 进入 " + challengeInfo["challenge_name"] + "/environment 目录进行测试")
-	fmt.Println("4. 进入 " + challengeInfo["challenge_name"] + "/writeup 目录补全WP及Exp")
-	fmt.Println("5. 一切完成后推送至Git仓库")
+	fmt.Println(challengeInfo["challenge_name"] + " created successfully, please follow the steps below:")
+	fmt.Println("1. Initialize Git repository.")
+	fmt.Println("2. Edit " + challengeInfo["challenge_name"] + "/meta.yml to modify challenge information")
+	fmt.Println("3. Enter " + challengeInfo["challenge_name"] + "/environment for challenge testing")
+	fmt.Println("4. Put your writeups in " + challengeInfo["challenge_name"] + "/writeup")
+	fmt.Println("5. Push to your remote Git repo")
 }
 
 func Wizard() {
 	challengeInfo := map[string]string{
-		"type":             "", // 题目类型
-		"language":         "", // 使用语言
-		"language_version": "", // 语言版本，HTML题目留空
-		"webserver":        "", // Web服务器，非Web题目留空
-		"db":               "", // 数据库，无数据库留空
-		"pwn_arch":         "", // Pwn题目架构，非Pwn题目留空
-		"pwn_server":       "", // Pwn题目服务器，非Pwn题目留空
-		"need_flag":        "", // 是否需要flag.sh
-		"need_start":       "", // 是否需要start.sh
-		"level":            "", // 题目等级
-		"base_image_name":  "", // 基础镜像名称
-		"base_registry":    "", // 基础镜像源地址
-		"challenge_name":   "", // 题目镜像名称
+		"type":             "", // Subject types
+		"language":         "", // Use of language
+		"language_version": "", // Language version, HTML title left blank
+		"webserver":        "", // Web server, non-web topic left empty
+		"db":               "", // Database, no database left empty
+		"pwn_arch":         "", // Pwn theme architecture, not Pwn theme left blank
+		"pwn_server":       "", // Pwn title server, non-Pwn title left empty
+		"need_flag":        "", // If you need flag.sh
+		"need_start":       "", // Do you need start.sh?
+		"level":            "", // Title ranking
+		"base_image_name":  "", // Name of the base mirror
+		"base_registry":    "", // The source address of the basic mirror
+		"challenge_name":   "", // Title of the title
 	}
-	// 判断配置中是否已设置默认镜像源
+	// Determine if the default mirror source is set in the configuration
 	config := global.Config{}
 	UserHomeDir, _ := os.UserHomeDir()
 	data, err := util.ReadFileByte(UserHomeDir + "/.config/cg/config.yaml")
 	if err != nil {
-		fmt.Println("未检测到配置文件，建议先设置默认镜像源")
-		registry := util.SelectOne("请选择您要使用的镜像源", global.Registry)
+		fmt.Println("No config file detected. It is recommended to set the registry first.")
+		registry := util.SelectOne("Choose the registry you want to use:", global.Registry)
 		challengeInfo["base_registry"] = registry + "/"
 	} else {
 		_ = yaml.Unmarshal(data, &config)
-		fmt.Println("检测到配置文件，将使用配置文件中的镜像源")
-		fmt.Println("镜像源地址：" + color.FgCyan.Render(config.RegistryUrl))
+		fmt.Println("Configuration file detected, the registry in the configuration file will be used.")
+		fmt.Println("Registry URL：" + color.FgCyan.Render(config.RegistryUrl))
 		fmt.Println()
 		challengeInfo["base_registry"] = config.RegistryUrl + "/"
 	}
-	color.Green.Println("如选择错误，请按 Ctrl+C 终止程序，然后重新执行向导")
-	challengeInfo["type"] = util.SelectOne("请选择您要创建的题目类型", global.ChallengeType)
+	color.Green.Println("If you make the wrong selection, press Ctrl+C to terminate the program and re-execute the wizard.")
+	challengeInfo["type"] = util.SelectOne("Select the question type you want to create:", global.ChallengeType)
 	challengeInfo["base_image_name"] = challengeInfo["type"]
 	switch challengeInfo["type"] {
 	case "web":
@@ -121,27 +121,27 @@ func Wizard() {
 	case "misc":
 		challengeInfo = WizardSocket(challengeInfo)
 	}
-	color.Cyan.Println("题目名称应当全为小写，如为中文名称则使用拼音，格式如下")
-	color.Cyan.Println("challenge_年份_所属比赛简写_分类_题目名称")
+	color.Cyan.Println("The challenge name should be lowercase and not contain special characters, in the form below:")
+	color.Cyan.Println("(year)_(ctf_abbreviation_name)_(category)_(challenge_name)")
 	fmt.Println("")
-	color.Cyan.Println("例1 2021年 N1CTF Web类 babysqli，则为 challenge_2021_n1ctf_web_baysqli")
-	color.Cyan.Println("例2 2019年 SCTF Pwn类 babyheap，则为 challenge_2019_sctf_pwn_bayheap")
-	// 不断获取输入直到有内容
+	color.Cyan.Println("Ex 1: 2021 N1CTF 'babysqli' (Web), 2021_n1ctf_web_babysqli.")
+	color.Cyan.Println("Ex 2: 2019 SCTF 'babyheap' (Pwn), 2019_sctf_pwn_babyheap.")
+	// Keep getting input until there's content
 	for {
-		challengeInfo["challenge_name"] = util.InputLine("请输入您要创建的题目镜像名称")
+		challengeInfo["challenge_name"] = util.InputLine("Enter challenge image name:")
 		if len(challengeInfo["challenge_name"]) != 0 {
 			break
 		}
-		color.Red.Println("你未输入题目名称，请重新输入")
+		color.Red.Println("Please re-enter the challenge image name.")
 	}
-	// 创建
+	// Created
 	Generate(challengeInfo)
 }
 
 func WizardWeb(challengeInfo map[string]string) map[string]string {
-	// 判断语言
-	challengeInfo["language"] = util.SelectOne("请选择您要使用的语言", global.Language)
-	// 判断语言版本
+	// Judging Language
+	challengeInfo["language"] = util.SelectOne("Select the language:", global.Language)
+	// Judging the language version
 	if challengeInfo["language"] != "html" {
 		languageVersion := []string{}
 		switch challengeInfo["language"] {
@@ -156,28 +156,28 @@ func WizardWeb(challengeInfo map[string]string) map[string]string {
 		case "ruby":
 			languageVersion = global.RubyVersion
 		}
-		challengeInfo["language_version"] = util.SelectArray("请选择您要使用的版本", languageVersion)
+		challengeInfo["language_version"] = util.SelectArray("Select the version:", languageVersion)
 	}
-	// 判断Web服务器
+	// Judging Web Servers
 	switch challengeInfo["language"] {
 	case "php", "html":
-		challengeInfo["webserver"] = util.SelectOne("请选择您要使用的Web服务器", global.PHPWebServer)
+		challengeInfo["webserver"] = util.SelectOne("Select the PHP webserver", global.PHPWebServer)
 	case "java":
-		challengeInfo["webserver"] = util.SelectOne("请选择您要使用的Web服务器", global.JavaServer)
+		challengeInfo["webserver"] = util.SelectOne("Select the Java webserver", global.JavaServer)
 	case "python":
-		challengeInfo["webserver"] = util.SelectOne("请选择您要使用的托管方式", global.PythonWebServer)
+		challengeInfo["webserver"] = util.SelectOne("Select the Python webserver", global.PythonWebServer)
 	}
-	// 判断数据库
+	// Judging the database
 	if challengeInfo["language"] != "html" {
-		challengeInfo["db"] = util.SelectOne("是否需要数据库", global.DBType)
+		challengeInfo["db"] = util.SelectOne("Do you need a database?", global.DBType)
 	}
-	// 拼接镜像名称
+	// Spelling of the mirror name
 	baseImageName := ""
 	switch challengeInfo["language"] {
 	case "php", "python", "java", "html":
 		baseImageName += "_" + challengeInfo["webserver"]
 	case "nodejs", "ruby":
-		// 不需要webserver
+		// No need for a web server
 	}
 	if challengeInfo["db"] != "" {
 		baseImageName += "_" + challengeInfo["db"]
@@ -191,9 +191,9 @@ func WizardWeb(challengeInfo map[string]string) map[string]string {
 }
 
 func WizardPwn(challengeInfo map[string]string) map[string]string {
-	challengeInfo["pwn_server"] = util.SelectOne("请选择您期望的启动方式", global.PwnServer)
-	challengeInfo["pwn_arch"] = util.SelectOne("请选择您要使用的架构", global.PwnArch)
-	// 拼接镜像名称
+	challengeInfo["pwn_server"] = util.SelectOne("Select your desired startup method", global.PwnServer)
+	challengeInfo["pwn_arch"] = util.SelectOne("Select the architecture", global.PwnArch)
+	// Spelling of the mirror name
 	baseImageName := ""
 	switch challengeInfo["pwn_arch"] {
 	case "":
@@ -211,9 +211,9 @@ func WizardSocket(challengeInfo map[string]string) map[string]string {
 	delete(selectLanguage, "HTML")
 	delete(selectLanguage, "PHP")
 	delete(selectLanguage, "Ruby")
-	challengeInfo["language"] = util.SelectOne("请选择您要使用的语言", selectLanguage)
-	challengeInfo["db"] = util.SelectOne("是否需要数据库", global.DBType)
-	// 判断语言版本
+	challengeInfo["language"] = util.SelectOne("Select the language", selectLanguage)
+	challengeInfo["db"] = util.SelectOne("Do you need a database?", global.DBType)
+	// Judging the language version
 	languageVersion := []string{}
 	switch challengeInfo["language"] {
 	case "python":
@@ -223,22 +223,22 @@ func WizardSocket(challengeInfo map[string]string) map[string]string {
 	case "java":
 		languageVersion = global.JavaVersion
 	}
-	challengeInfo["language_version"] = util.SelectArray("请选择您要使用的版本", languageVersion)
-	// 拼接镜像名称
+	challengeInfo["language_version"] = util.SelectArray("Select the language version", languageVersion)
+	// Spelling of the mirror name
 	baseImageName := ""
 	if challengeInfo["db"] != "" {
 		baseImageName += "_" + challengeInfo["db"]
 	}
 	baseImageName += "_" + challengeInfo["language"]
 	baseImageName += "_" + challengeInfo["language_version"]
-	// version := util.SelectOne("请选择您要使用的版本", global.SelectVersion[language])
-	// hasDB = util.SelectOne("是否需要数据库", []string{"无", "MySQL", "MongoDB"})
-	// baseImageName += "_misc_socat"
-	// if hasDB != "无" {
-	// 	baseImageName += "_" + strings.ToLower(hasDB)
-	// 	hasDB = strings.ToLower(hasDB)
-	// }
-	// baseImageName += strings.ToLower(version)
+	// "Please select the version you want to use", global.SelectVersion[language])
+	// The following is a list of the most commonly used database types:
+	// This is the first time that the user has ever seen a video.
+	// If hasDB!= "No" {
+	// 	The main feature of the database is the database.
+	// 	The first is the "Street".
+	// ♪ I'm not going to be here
+	// The first is the image of the user.
 	challengeInfo["base_image_name"] += baseImageName
 	return challengeInfo
 }

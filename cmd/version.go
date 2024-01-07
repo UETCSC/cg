@@ -14,12 +14,12 @@ func init() {
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "输出 cg 的版本和更新时间",
+	Short: "Check the version and update time.",
 	Long:  "输出 cg 的版本和更新时间",
 	Run: func(cmd *cobra.Command, args []string) {
 		Cyan := color.FgCyan.Render
 		fmt.Println("Version:   ", Cyan(util.Version))
-		fmt.Println("BuildTime: ", Cyan(util.BuildTime))
-		fmt.Println("GitCommit: ", Cyan(util.GitCommitId))
+		fmt.Println("Build Time: ", Cyan(util.BuildTime))
+		fmt.Println("Commit: ", Cyan(util.GitCommitId))
 	},
 }

@@ -1,20 +1,19 @@
 package global
 
-// 镜像源配置
+// The image source configuration
 var Registry = map[string]string{
-	"AliYun": "registry.cn-hangzhou.aliyuncs.com/ctfhub_base",
 	// "CTFHub":    "registry.cn-hangzhou.aliyuncs.com/",
-	"DockerHub": "ctfhub",
+	"DockerHub": "uetctf",
 }
 
-// 题目类型
+// Challenge types
 var ChallengeType = map[string]string{
 	"Web":    "web",
 	"Pwn":    "pwn",
 	"Socket": "misc",
 }
 
-// 语言类型
+// Languages
 var Language = map[string]string{
 	"PHP":    "php",
 	"HTML":   "html",
@@ -41,36 +40,36 @@ var RubyVersion = []string{
 }
 
 var DBType = map[string]string{
-	"无/SQLite": "",
+	"Nothing/SQLite": "",
 	"MySQL":    "mysql",
 	// "MongoDB":  "mongodb",
 }
 
-// PHP Web服务器
+// PHP web server
 var PHPWebServer = map[string]string{
 	"Apache HTTPd": "httpd",
 	"Nginx":        "nginx",
 }
 
-// Python Web服务器
+// Python web server
 var PythonWebServer = map[string]string{
 	"gunicron":   "gunicron",
 	"supervisor": "supervisor",
 }
 
-// Java Web服务器
+// Java web server
 var JavaServer = map[string]string{
 	"Tomcat": "tomcat",
 }
 
-// Pwn架构
+// Pwn architecture
 var PwnArch = map[string]string{
 	"x86/x64 Binary": "binary",
 	// "x86/x64 Kernel":        "kernel",
 	// "arm/arm64/mips/mips64": "qemu",
 }
 
-// Pwn启动方式
+// How to start Pwn
 var PwnServer = map[string]string{
 	"socat":   "socat",
 	"xinet.d": "xinetd",
@@ -82,5 +81,5 @@ var FileTemplate = map[string]string{
 	"db.sql":   "db",
 }
 
-// 难度
-var Level = []string{"签到", "简单", "中等", "困难"}
+// Difficulty
+var Level = []string{"Warm-up", "Easy", "Medium", "Hard"}
