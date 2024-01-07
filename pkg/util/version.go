@@ -1,7 +1,7 @@
 package util
 
 var (
-	Version     = "v1.0.3"
-	BuildTime   = "2023-10-10"
+	Version     = "v1.0.3-en"
+	BuildTime   = "2024-07-01"
 	GitCommitId = "1234abcd"
 )

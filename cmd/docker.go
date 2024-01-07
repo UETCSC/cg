@@ -15,7 +15,6 @@ func init() {
 	DockerCmd.AddCommand(BuildCmd)
 	DockerCmd.AddCommand(RunCmd)
 	DockerCmd.AddCommand(StopCmd)
-	DockerCmd.AddCommand(BashCmd)
 	DockerCmd.AddCommand(LogCmd)
 	DockerCmd.AddCommand(SaveCmd)
 }
@@ -26,17 +25,17 @@ var Red = color.FgRed.Render
 func CheckDockerCompose() bool {
 	_, err := os.Stat("docker-compose.yml")
 	if err == nil {
-		fmt.Println(Cyan("检测到当前目录存在 docker-compose.yml"))
+		fmt.Println(Cyan("Detected docker-compose.yml"))
 	} else if os.IsNotExist(err) {
-		fmt.Println(Red("当前目录不存在 docker-compose.yml"))
+		fmt.Println(Red("No docker-compose.yml detected"))
 	}
 	return err == nil
 }
 
 var DockerCmd = &cobra.Command{
 	Use:     "docker",
-	Short:   "docker相关操作",
-	Long:    `docker相关操作`,
+	Short:   "docker operations",
+	Long:    `docker operations`,
 	Aliases: []string{"d"},
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
@@ -48,11 +47,11 @@ var DockerCmd = &cobra.Command{
 
 var AutoCmd = &cobra.Command{
 	Use:     "auto",
-	Short:   "依次执行 Stop -> Build -> Run -> Bash",
-	Long:    `构建镜像`,
+	Short:   "Automate the workflow Stop -> Build -> Run",
+	Long:    `Automate the workflow Stop -> Build -> Run`,
 	Aliases: []string{"a"},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("开始测试")
+		fmt.Println("Start testing")
 		if !CheckDockerCompose() {
 			os.Exit(0)
 		}
@@ -62,11 +61,11 @@ var AutoCmd = &cobra.Command{
 
 var BuildCmd = &cobra.Command{
 	Use:     "build",
-	Short:   "构建镜像",
-	Long:    `构建镜像`,
+	Short:   "Build image",
+	Long:    `Build image`,
 	Aliases: []string{"b"},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("开始构建镜像")
+		fmt.Println("Building the image")
 		if !CheckDockerCompose() {
 			os.Exit(0)
 		}
@@ -76,11 +75,11 @@ var BuildCmd = &cobra.Command{
 
 var RunCmd = &cobra.Command{
 	Use:     "run",
-	Short:   "运行镜像",
-	Long:    `运行镜像`,
+	Short:   "Run image",
+	Long:    `Run umage`,
 	Aliases: []string{"r"},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("开始运行镜像")
+		fmt.Println("Running the image")
 		if !CheckDockerCompose() {
 			os.Exit(0)
 		}
@@ -90,11 +89,11 @@ var RunCmd = &cobra.Command{
 
 var StopCmd = &cobra.Command{
 	Use:     "stop",
-	Short:   "停止镜像",
-	Long:    `停止镜像`,
+	Short:   "Stop the container",
+	Long:    `Stop the container`,
 	Aliases: []string{"s"},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("开始停止镜像")
+		fmt.Println("Stopping")
 		if !CheckDockerCompose() {
 			os.Exit(0)
 		}
@@ -102,25 +101,12 @@ var StopCmd = &cobra.Command{
 	},
 }
 
-var BashCmd = &cobra.Command{
-	Use:   "bash",
-	Short: "执行bash进入容器",
-	Long:  `执行bash进入容器`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("开始进入容器")
-		if !CheckDockerCompose() {
-			os.Exit(0)
-		}
-		cmdutil.Bash()
-	},
-}
-
 var LogCmd = &cobra.Command{
 	Use:   "log",
-	Short: "查看容器日志",
-	Long:  `查看容器日志`,
+	Short: "View container logs",
+	Long:  `View container logs`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("查看容器日志")
+		fmt.Println("View container logs")
 		if !CheckDockerCompose() {
 			os.Exit(0)
 		}
@@ -130,10 +116,10 @@ var LogCmd = &cobra.Command{
 
 var SaveCmd = &cobra.Command{
 	Use:   "save",
-	Short: "导出容器tar包",
-	Long:  `导出容器tar包`,
+	Short: "Save the image to a tarball.",
+	Long:  `Save the image to a tarball.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("导出容器tar包")
+		fmt.Println("Save the image to a tarball.")
 		if !CheckDockerCompose() {
 			os.Exit(0)
 		}

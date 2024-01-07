@@ -18,8 +18,8 @@ func init() {
 
 var SelfCmd = &cobra.Command{
 	Use:   "self",
-	Short: "升级",
-	Long:  "升级",
+	Short: "upgrade",
+	Long:  "upgrade",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 		os.Exit(0)
@@ -28,8 +28,8 @@ var SelfCmd = &cobra.Command{
 
 var UpgradeCmd = &cobra.Command{
 	Use:   "upgrade",
-	Short: "自动升级",
-	Long:  "自动升级",
+	Short: "Automatically upgrade",
+	Long:  "Automatically upgrade",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmdutil.Upgrade(Proxy)
 	},
@@ -37,8 +37,8 @@ var UpgradeCmd = &cobra.Command{
 
 var SelfCheckCmd = &cobra.Command{
 	Use:   "check",
-	Short: "检查新版本",
-	Long:  "检查新版本",
+	Short: "Check for a new version.",
+	Long:  "Check for a new version.",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmdutil.SelfCheck(Proxy)
 	},

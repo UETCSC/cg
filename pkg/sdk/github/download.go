@@ -13,7 +13,7 @@ import (
 	"golang.org/x/net/proxy"
 )
 
-// Download 下载资源并另存为
+// Download the resource and save as
 func Download(srcURL string, proxy_str string, filename string, flag int, perm fs.FileMode, withProgress bool) (size int64, err error) {
 	httpClient := &http.Client{}
 	if proxy_str != "" {
@@ -23,14 +23,14 @@ func Download(srcURL string, proxy_str string, filename string, flag int, perm f
 			fmt.Fprintln(os.Stderr, "can't connect to the proxy:", err)
 			os.Exit(1)
 		}
-		// setup a http client
+		// Setup an http client
 		httpTransport := &http.Transport{}
 
 		httpTransport.Dial = dialer.Dial
 		httpClient = &http.Client{Transport: httpTransport}
 	}
 
-	//发起网络请求
+	//Send a web request
 	resp, err := httpClient.Get(srcURL)
 	if err != nil {
 		return 0, NewDownloadError(srcURL, err)
@@ -68,8 +68,6 @@ func Download(srcURL string, proxy_str string, filename string, flag int, perm f
 			progressbar.OptionOnCompletion(func() {
 				_, _ = fmt.Fprint(ansi.NewAnsiStdout(), "\n")
 			}),
-			// progressbar.OptionSpinnerType(35),
-			// progressbar.OptionFullWidth(),
 		)
 		_ = bar.RenderBlank()
 		dst = io.MultiWriter(f, bar)
@@ -80,7 +78,7 @@ func Download(srcURL string, proxy_str string, filename string, flag int, perm f
 	return io.Copy(dst, resp.Body)
 }
 
-// IsSuccess 返回 http 请求是否成功
+// IsSuccess returns the request to http for success
 func IsSuccess(statusCode int) bool {
 	return statusCode >= http.StatusOK && statusCode < http.StatusMultipleChoices
 }
