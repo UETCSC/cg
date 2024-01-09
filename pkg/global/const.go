@@ -3,7 +3,7 @@ package global
 // The image source configuration
 var Registry = map[string]string{
 	// "CTFHub":    "registry.cn-hangzhou.aliyuncs.com/",
-	"DockerHub": "uetctf",
+	"DockerHub": "ctfhub",
 }
 
 // Challenge types
@@ -53,7 +53,7 @@ var PHPWebServer = map[string]string{
 
 // Python web server
 var PythonWebServer = map[string]string{
-	"gunicron":   "gunicron",
+	"gunicorn":   "gunicorn",
 	"supervisor": "supervisor",
 }
 

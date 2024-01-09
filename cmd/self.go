@@ -18,8 +18,8 @@ func init() {
 
 var SelfCmd = &cobra.Command{
 	Use:   "self",
-	Short: "upgrade",
-	Long:  "upgrade",
+	Short: "Upgrade",
+	Long:  "Upgrade",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 		os.Exit(0)

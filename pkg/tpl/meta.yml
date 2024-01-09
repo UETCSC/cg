@@ -1,11 +1,11 @@
 author:
-  name: l1n3
-  contact: yw9381@163.com
+  name: uetctf
+  contact: uetctf.info@gmail.com
 task:
-  name: challenge_web_2022_hitcon_rce
+  name: something
   type: Web
   description: 
-  level: 签到
+  level: Easy
   flag: 
   hints:
 challenge:

@@ -14,8 +14,8 @@ func init() {
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Check the version and update time.",
-	Long:  "输出 cg 的版本和更新时间",
+	Short: "Check cg version and update time.",
+	Long:  "Check cg version and update time.",
 	Run: func(cmd *cobra.Command, args []string) {
 		Cyan := color.FgCyan.Render
 		fmt.Println("Version:   ", Cyan(util.Version))

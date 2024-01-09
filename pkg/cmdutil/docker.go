@@ -10,7 +10,6 @@ import (
 
 func exec_cmd(command string) {
 	cmd := exec.Command("/bin/bash", "-c", command)
-	cmd.Env = append(cmd.Env, "COMPOSE_DOCKER_CLI_BUILD=1", "DOCKER_BUILDKIT=1")
 	stderr, err := cmd.StderrPipe()
 	if err != nil {
 		log.Fatalln("stderr pipe ", err)
