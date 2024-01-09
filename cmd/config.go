@@ -26,8 +26,8 @@ var ConfigCmd = &cobra.Command{
 
 var ConfigSetCmd = &cobra.Command{
 	Use:   "set",
-	Short: "Set current config",
-	Long:  "Set current config",
+	Short: "Set current config.",
+	Long:  "Set current config.",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmdutil.ConfigSet()
 	},
@@ -35,8 +35,8 @@ var ConfigSetCmd = &cobra.Command{
 
 var ConfigGetCmd = &cobra.Command{
 	Use:   "get",
-	Short: "Get current config",
-	Long: "Get current config",
+	Short: "Get current config.",
+	Long: "Get current config.",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmdutil.ConfigGet()
 	},
@@ -44,8 +44,8 @@ var ConfigGetCmd = &cobra.Command{
 
 var ConfigCleanCmd = &cobra.Command{
 	Use:   "clean",
-	Short: "Clean current config",
-	Long:  "Clean current config",
+	Short: "Clean current config.",
+	Long:  "Clean current config.",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmdutil.ConfigClean()
 	},

@@ -1,15 +1,15 @@
 # CHALLENGE_NAME
 
-题目来源: `CHALLENGE_REFER`
+Source: `CHALLENGE_REFER`
 
-## 制作者信息
+## Producer information
 
-- 制作者: `AUTHOR`
-- 联系方式: `EMAIL`
+- Author: `AUTHOR`
+- Contact information: `EMAIL`
 
-## 题目信息
+## Question information
 
-- 镜像名称: `TASK_NAME`
-- 题目类型: `TASK_TYPE`
-- 题目难度: `TASK_LEVEL`
+- Image name: `TASK_NAME`
+- Type: `TASK_TYPE`
+- Difficulty: `TASK_LEVEL`
 - flag: `TASK_FLAG`

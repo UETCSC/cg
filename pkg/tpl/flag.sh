@@ -1,28 +1,19 @@
 #!/bin/bash
 <<PROMPT
-请根据需要自行修改此脚本，确保flag能够放置在正确位置
-部分Web题目需要正确的域名访问，请在此脚本中配置正确的域名
+Please modify this script as needed to ensure that the flag can be placed in the correct location
+Some web questions require correct domain name access. Please configure the correct domain name in this script.
 
-FLAG 平台传入的正确的flag
-DOMAIN 平台传入的当前环境的域名
+FLAG The correct flag passed in by the platform
+DOMAIN The domain name of the current environment passed in by the platform
 
-以下为已经内置的函数
+The following are the built-in functions
 
-将flag写入到文件系统中
-# 默认写入/flag
+Write the flag to the file system
+#Write /flag by default
 write_flag_in_fs
 
-# 写入至web目录 /var/www/html/flag.txt
+# Write to the web directory /var/www/html/flag.txt
 write_flag_in_fs /var/www/html/flag.txt
-
------------------
-
-将flag写入到数据库
-# 默认写入web库中flag表的flag字段
-write_flag_in_db
-
-# 指定库为sqli, 表为user, 列为flag写入
-write_flag_in_db sqli user flag
 PROMPT
 
 write_flag_in_fs() {

@@ -10,12 +10,9 @@ import (
 var RootCmd = &cobra.Command{
 	Use:   "cg",
 	Short: "cg - generate your CTF challenges with quality.",
-	Long: `cg - generate your CTF challenges with quality. From UETCSC with <3.`,
+	Long: `cg - generate your CTF challenges with quality. From uetctf with <3.`,
 }
 
-// func init() {
-// 	RootCmd.CompletionOptions.DisableDefaultCmd = true
-// }
 
 func Execute() {
 	cc.Init(&cc.Config{

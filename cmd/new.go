@@ -16,7 +16,7 @@ func init() {
 var newCmd = &cobra.Command{
 	Use:     "new",
 	Short:   "Create a new challenge",
-	Long:    `创建新的题目模板`,
+	Long:    `Create a new challenge`,
 	Aliases: []string{"n"},
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
@@ -26,8 +26,8 @@ var newCmd = &cobra.Command{
 
 var WizardCmd = &cobra.Command{
 	Use:     "wizard",
-	Short:   "Create a new challenge using the wizard.",
-	Long:    `Create a new challenge using the wizard.`,
+	Short:   "Create a new challenge using the wizard",
+	Long:    `Create a new challenge using the wizard`,
 	Aliases: []string{"w"},
 	Run: func(cmd *cobra.Command, args []string) {
 		cmdutil.Wizard()

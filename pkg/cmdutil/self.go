@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	ORG  = "UETCSC"
+	ORG  = "vnu-uetctf"
 	REPO = "cg"
 )
 

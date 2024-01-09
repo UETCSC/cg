@@ -27,7 +27,7 @@ func CheckDockerCompose() bool {
 	if err == nil {
 		fmt.Println(Cyan("Detected docker-compose.yml"))
 	} else if os.IsNotExist(err) {
-		fmt.Println(Red("No docker-compose.yml detected"))
+		fmt.Println(Red("No docker-compose.yml detected."))
 	}
 	return err == nil
 }
@@ -76,7 +76,7 @@ var BuildCmd = &cobra.Command{
 var RunCmd = &cobra.Command{
 	Use:     "run",
 	Short:   "Run image",
-	Long:    `Run umage`,
+	Long:    `Run image`,
 	Aliases: []string{"r"},
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Running the image")
@@ -116,8 +116,8 @@ var LogCmd = &cobra.Command{
 
 var SaveCmd = &cobra.Command{
 	Use:   "save",
-	Short: "Save the image to a tarball.",
-	Long:  `Save the image to a tarball.`,
+	Short: "Save the image to a tarball",
+	Long:  `Save the image to a tarball`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Save the image to a tarball.")
 		if !CheckDockerCompose() {

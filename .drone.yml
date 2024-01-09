@@ -8,7 +8,7 @@ steps:
     image: appleboy/drone-git-push
     settings:
       branch: main
-      remote: "ssh://git@github.com/UET-CTF/cg.git
+      remote: "ssh://git@github.com/vnu-uetctf/cg.git
       force: false
       followtags: true
       ssh_key:
